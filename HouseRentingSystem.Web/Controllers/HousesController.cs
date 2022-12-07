@@ -1,12 +1,15 @@
-﻿using HouseRentingSystem.Web.Infrastructure;
-using HouseRentingSystem.Web.Models.Houses;
+﻿using AutoMapper;
+
 using HouseRentingSystem.Services.Agents;
 using HouseRentingSystem.Services.Houses;
 using HouseRentingSystem.Services.Houses.Models;
+using HouseRentingSystem.Web.Infrastructure;
+using HouseRentingSystem.Web.Models.Houses;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using AutoMapper;
+
+using static HouseRentingSystem.Web.Areas.Admin.AdminConstants;
 
 namespace HouseRentingSystem.Web.Controllers
 {
@@ -46,6 +49,11 @@ namespace HouseRentingSystem.Web.Controllers
         [Authorize]
         public async Task<IActionResult> Mine()
         {
+            if (this.User.IsInRole(AdminRoleName))
+            {
+                return RedirectToAction("Mine", "Houses", new { area = "Admin" });
+            }
+
             IEnumerable<HouseServiceModel> myHouses;
 
             var userId = this.User.Id();

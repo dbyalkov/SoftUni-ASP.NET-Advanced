@@ -3,6 +3,7 @@ using HouseRentingSystem.Services.Data;
 using HouseRentingSystem.Services.Data.Common;
 using HouseRentingSystem.Services.Data.Entities;
 using HouseRentingSystem.Services.Houses;
+using HouseRentingSystem.Services.Rents;
 using HouseRentingSystem.Services.Statistics;
 using HouseRentingSystem.Services.Users;
 using HouseRentingSystem.Web.Controllers;
@@ -46,6 +47,7 @@ namespace HouseRentingSystem.Web
             builder.Services.AddTransient<IAgentService, AgentService>();
             builder.Services.AddTransient<IStatisticsService, StatisticsService>();
             builder.Services.AddTransient<IUserService, UserService>();
+            builder.Services.AddTransient<IRentService, RentService>();
 
             builder.Services.AddAutoMapper(
                 typeof(IHouseService).Assembly,
@@ -77,20 +79,15 @@ namespace HouseRentingSystem.Web
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                  name: "default",
-                  pattern: "{controller=Home}/{action=Index}/{id?}"
-                );
+                    name: "Areas",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
                 endpoints.MapControllerRoute(
-                  name: "areas",
-                  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-                );
+                  name: "House Details",
+                  pattern: "House/Details/{id}/{information}",
+                  defaults: new { Controller = "Houses", Action = "Details" });
 
-                endpoints.MapControllerRoute(
-                  name: "houseDetails",
-                  pattern: "House/Details/{id}/{information}"
-                );
-
+                endpoints.MapDefaultControllerRoute();
                 endpoints.MapRazorPages();
             });
 
