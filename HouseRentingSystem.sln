@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HouseRentingSystem.Services
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HouseRentingSystem.Web", "HouseRentingSystem.Web\HouseRentingSystem.Web.csproj", "{D96A8CF9-37D8-42FB-AD79-BFFB497BF6BA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HouseRentingSystem.Tests", "HouseRentingSystem.Tests\HouseRentingSystem.Tests.csproj", "{71C03A39-91F7-44B9-9667-173B9B8E81D8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{D96A8CF9-37D8-42FB-AD79-BFFB497BF6BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D96A8CF9-37D8-42FB-AD79-BFFB497BF6BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D96A8CF9-37D8-42FB-AD79-BFFB497BF6BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71C03A39-91F7-44B9-9667-173B9B8E81D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71C03A39-91F7-44B9-9667-173B9B8E81D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71C03A39-91F7-44B9-9667-173B9B8E81D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71C03A39-91F7-44B9-9667-173B9B8E81D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

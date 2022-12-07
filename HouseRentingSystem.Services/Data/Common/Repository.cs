@@ -1,9 +1,7 @@
-﻿using HouseRentingSystem.Services.Data;
+﻿using System.Linq.Expressions;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-
-using System.Linq.Expressions;
 
 namespace HouseRentingSystem.Services.Data.Common
 {

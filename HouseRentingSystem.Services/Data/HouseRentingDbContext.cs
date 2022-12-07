@@ -8,15 +8,28 @@ namespace HouseRentingSystem.Services.Data
 {
     public class HouseRentingDbContext : IdentityDbContext<User>
     {
-        public HouseRentingDbContext(DbContextOptions<HouseRentingDbContext> options)
-            : base(options) { }
+        private bool seedDb;
+
+        public HouseRentingDbContext(DbContextOptions<HouseRentingDbContext> options, bool seed = true)
+            : base(options)
+        {
+            if (!this.Database.IsRelational())
+            {
+                this.Database.EnsureCreated();
+            }
+
+            this.seedDb = seed;
+        }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.ApplyConfiguration(new UserConfiguration());
-            builder.ApplyConfiguration(new AgentConfiguration());
-            builder.ApplyConfiguration(new CategoryConfiguration());
-            builder.ApplyConfiguration(new HouseConfiguration());
+            if (this.seedDb)
+            {
+                builder.ApplyConfiguration(new UserConfiguration());
+                builder.ApplyConfiguration(new AgentConfiguration());
+                builder.ApplyConfiguration(new CategoryConfiguration());
+                builder.ApplyConfiguration(new HouseConfiguration());
+            }
 
             base.OnModelCreating(builder);
         }
