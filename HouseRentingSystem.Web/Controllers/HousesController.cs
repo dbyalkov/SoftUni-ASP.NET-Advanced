@@ -8,6 +8,7 @@ using HouseRentingSystem.Web.Models.Houses;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 
 using static HouseRentingSystem.Web.Areas.Admin.AdminConstants;
 
@@ -18,15 +19,18 @@ namespace HouseRentingSystem.Web.Controllers
         private readonly IHouseService houses;
         private readonly IAgentService agents;
         private readonly IMapper mapper;
+        private readonly IMemoryCache cache;
 
         public HousesController(
             IHouseService _houses,
             IAgentService _agents,
-            IMapper _mapper)
+            IMapper _mapper,
+            IMemoryCache _cache)
         {
             this.houses = _houses;
             this.agents = _agents;
             this.mapper = _mapper;
+            this.cache = _cache;
         }
 
         [HttpGet]
@@ -263,6 +267,8 @@ namespace HouseRentingSystem.Web.Controllers
 
             await houses.RentAsync(id, this.User.Id());
 
+            this.cache.Remove(RentsCacheKey);
+
             return RedirectToAction(nameof(Mine));
         }
 
@@ -281,6 +287,8 @@ namespace HouseRentingSystem.Web.Controllers
             }
 
             await this.houses.LeaveAsync(id);
+
+            this.cache.Remove(RentsCacheKey);
 
             return RedirectToAction(nameof(Mine));
         }
